@@ -6,17 +6,20 @@ const AddWorker = () => {
   const [enteredWorkerName, setEnteredWorkerName] = useState("");
   const [enteredWage, setEnteredWage] = useState("");
 
-  const workerNameChangeHandler = (e) => {
-    setEnteredWorkerName(e.target.value);
-  };
-
-  const wageChangeHandler = (e) => {
-    setEnteredWage(e.target.value);
-  };
+  const minimumWage = 17002;
 
   const addWorkerHandler = (e) => {
     e.preventDefault();
-    console.log(enteredWorkerName, enteredWage);
+    if (
+      enteredWorkerName.trim().length === 0 ||
+      enteredWage.trim().length === 0
+    )
+      return;
+
+    if (+enteredWage < minimumWage) return;
+    setEnteredWorkerName("");
+    setEnteredWage("");
+    console.log(enteredWorkerName.trim(), enteredWage);
   };
   return (
     <Card className="mt-10">
@@ -29,7 +32,8 @@ const AddWorker = () => {
           className="max-w-[40rem] w-full mx-auto border p-2"
           placeholder="Çalışan ismi yazınız."
           id="name"
-          onChange={workerNameChangeHandler}
+          onChange={(e) => setEnteredWorkerName(e.target.value)}
+          value={enteredWorkerName}
         />
         <label htmlFor="wage" className="font-medium">
           Maaş Miktarı
@@ -39,7 +43,8 @@ const AddWorker = () => {
           className="max-w-[40rem] w-full mx-auto border p-2"
           placeholder="Maaş miktarı yazınız."
           id="wage"
-          onChange={wageChangeHandler}
+          onChange={(e) => setEnteredWage(e.target.value)}
+          value={enteredWage}
         />
         <Button className="mt-2" type="submit">
           Ekle
