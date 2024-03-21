@@ -1,3 +1,4 @@
+import Button from "../UI/Button";
 import Card from "../UI/Card";
 
 const AddWorker = () => {
@@ -22,7 +23,7 @@ const AddWorker = () => {
           placeholder="Maaş miktarı yazınız."
           id="wage"
         />
-        <button className="p-2 mt-2 tex-lg bg-teal-700 text-white">Ekle</button>
+        <Button className="mt-2">Ekle</Button>
       </form>
     </Card>
   );
