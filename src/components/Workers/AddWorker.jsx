@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 
-const AddWorker = () => {
+const AddWorker = (props) => {
   const [enteredWorkerName, setEnteredWorkerName] = useState("");
   const [enteredWage, setEnteredWage] = useState("");
 
@@ -19,6 +19,14 @@ const AddWorker = () => {
     if (+enteredWage < minimumWage) return;
     setEnteredWorkerName("");
     setEnteredWage("");
+    props.setWorkers((prevState) => [
+      {
+        id: Math.floor(Math.random() * 1000),
+        name: enteredWorkerName,
+        wage: enteredWage,
+      },
+      ...prevState,
+    ]);
     console.log(enteredWorkerName.trim(), enteredWage);
   };
   return (
@@ -41,7 +49,7 @@ const AddWorker = () => {
         <input
           type="number"
           className="max-w-[40rem] w-full mx-auto border p-2"
-          placeholder="Maaş miktarı yazınız."
+          placeholder="Maaş miktarı yazınız. Min wage 17.002₺"
           id="wage"
           onChange={(e) => setEnteredWage(e.target.value)}
           value={enteredWage}
